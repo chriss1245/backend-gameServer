@@ -1,0 +1,66 @@
+
+body{
+    background-color:rgb(54, 53, 53);
+    color:white;
+}
+
+h1{
+    color:red
+}
+
+h2{
+    color:fuchsia;
+}
+
+h3{
+    color:greenyellow;
+}
+
+#nav{
+    margin-bottom:20px;
+    color:blue;
+    font-size:20px
+    
+    
+}
+li{
+    display:inline-grid;
+    margin-right: 2%;
+}
+
+#header{
+    display:flex;
+    align-items: center;
+    justify-content: center
+}
+
+#intro{
+    width: 100%;
+}
+#games{
+    display: inline-block;
+    width: 85%;
+}
+
+aside{
+    display: inline-block;
+    width: 14%;
+
+}
+#asidetitle{
+    color:cyan;
+}
+
+#snake{
+    display: inline-block;
+    width: 40%;
+}
+
+#tictactoe{
+    display:inline-block;
+    width: 40%;
+}
+
+a:link{
+    text-decoration:none;
+}
