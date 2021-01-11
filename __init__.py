@@ -63,8 +63,11 @@ def setUpdateDB():
         score.write(json.dumps(app.current_scores))
 
 
-getUpdateDB()   
+#getUpdateDB()   
+app.current_scores = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0]]
 
+import os
+print(os.getcwd())
 
 #if (__name__ == "__main__"):
  #       app.run(debug=True)
