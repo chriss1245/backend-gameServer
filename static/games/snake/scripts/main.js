@@ -1,57 +1,59 @@
+class Interface{
 
-mygame = new game()
-var addedNewHighScore = false
-var score
-fetch('http://127.0.0.1:5000/getScore?').then((response) => {
-    return response.json();
-  }).then((myJson) => {
-    score = myJson['result']})
+    constructor(){
+        // Creating instances of Game and Score
+        this.game = new Game()
+        this.score = new Score('scores', 'snake')
 
-addEventListener('keydown', aux)
+        // Requesting the top scores
+        this.score.setUpHighScores()
 
-
-function addNewHighScore(newScore){
-    var index = 0
-    while(newScore[1] < score[index][1]){
-        index = index + 1
+        // event listeners
+        addEventListener('keydown', this._keypressedHandler.bind(this))
+        
     }
-    slice1 = score.slice(0,index)
-    slice2 = score.slice(index)
-    slice2.pop()
-    
-    score = slice1.concat([newScore].concat(slice2))
-    
-    fetch('http://127.0.0.1:5000/setScore?newScore='+JSON.stringify(score))
-}
 
-function play(){
-    
-    mygame.refresh()
-    mygame.draw()
-    if ((mygame.over & mygame.score > score[9][1]) & (!addedNewHighScore)){
-        addNewHighScore([prompt('Type your name winner'), mygame.score])
-
-
+    run(){
+        // gameloop
+        this.gameloop = setInterval(this._run.bind(this), 100)
         
         
-        addedNewHighScore = true
-        var s = ''
-        for(i in score){
-            s = s + String(score[i][0])+': ' + String(score[i][1]) + '<br>'
+    }
+
+    _run(){
+        // condition for ending the game and trigger of addNewHIghScore method
+        
+        if (this.game.over & !this.game.snake.alive){
+            clearInterval(this.gameloop)
+            this.score.addNewHighScores(this.game.score)
+            this.score.showTopTen()
+            
+        } 
+
+        // updating the state of the game
+        this.game.refresh()
+
+        // rendering the game
+        this.game.draw()
+    }
+
+    _keypressedHandler(keypressed){
+        if(keypressed.key != 'Enter'){
+            this.game.snake.turn(keypressed)
+        } else if(keypressed.key == 'Enter' & this.game.over & !this.game.snake.alive){
+            this.score.setUpHighScores()
+            this.game.restart()
+            this.run()
+            
+        }else if (keypressed.key == 'Enter' & this.game.over & this.game.snake.alive){
+            this.score.setUpHighScores()
+            this.game.over = false
         }
-        document.getElementById('scores').innerHTML = s
+        keypressed.stopPropagation()
     }
-}
-var lastrender = 0
 
-function aux(keypressed){
-    mygame.snake.turn(keypressed)
-    if(keypressed.key == 'Enter'){
-        mygame.restart()
-        addedNewHighScore = false
-        fetch('http://127.0.0.1:5000/getScore?').then((response) => {return response.json()}).then((myJson) => {score = myJson['result']})
-    }
 }
 
+myInterface = new Interface()
 
-setInterval(play, 100);
+myInterface.run()

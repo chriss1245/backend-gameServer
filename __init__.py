@@ -28,6 +28,7 @@ bundles ={
     'snake_js': Bundle(
         'games/snake/scripts/snake.js',
         'games/snake/scripts/game.js',
+        'games/snake/scripts/assets.js',
         'games/snake/scripts/main.js',
         output='gen/snake.js'
     )
@@ -45,14 +46,12 @@ def getScore():
 @app.route('/setScore')
 def setScore():
     app.current_scores = json.loads(request.args.get('newScore'))
-    print(app.current_scores)
+    game = json.loads(request.args.get('game'))
+    setUpdateDB()
     return make_response(jsonify({"message": "OK"}), 200)
 
 
 #pseudo database
-
-
-
 def getUpdateDB():
     with open(file = 'scores_db.txt', mode='r') as score:
         app.current_scores = json.loads(score.read())
@@ -63,9 +62,9 @@ def setUpdateDB():
         score.write(json.dumps(app.current_scores))
 
 
-getUpdateDB()   
+#getUpdateDB()   
 
 
 #if (__name__ == "__main__"):
- #       app.run(debug=True)
+ #      app.run(debug=True)
 

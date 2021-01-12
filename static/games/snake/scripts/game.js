@@ -1,4 +1,4 @@
-class game{
+class Game{
     constructor(){
         this.ingame = true;
         this.canvas = document.getElementById("table")
@@ -71,15 +71,3 @@ class game{
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
