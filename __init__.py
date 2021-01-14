@@ -4,7 +4,10 @@ from flask import jsonify, make_response
 import json
 
 
-app = Flask(__name__)
+app = Flask(__name__,
+            static_url_path='',
+            template_folder='frontend',
+            static_folder='frontend')
 
 
 @app.route("/", methods = ['POST', 'GET'])
@@ -19,7 +22,7 @@ def snake():
 
 bundles ={
     'index_css': Bundle(
-        'style/index.css',
+        'index.css',
         output='gen/index.css'),
     'snake_css': Bundle(
         'games/snake/style/snake.css',
@@ -68,6 +71,6 @@ app.current_scores = [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0
 import os
 print(os.getcwd())
 
-#if (__name__ == "__main__"):
- #      app.run(debug=True)
+if (__name__ == "__main__"):
+       app.run(debug=True)
 
