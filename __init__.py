@@ -6,33 +6,33 @@ import json
 
 app = Flask(__name__,
             static_url_path='',
-            template_folder='frontend',
-            static_folder='frontend')
+            template_folder='frontend-gameServer',
+            static_folder='frontend-gameServer')
 
 
 @app.route("/", methods = ['POST', 'GET'])
 def home():
-    return render_template('index.html')
+    return render_template('html/index.html')
 
 @app.route("/snake", methods=["POST", "GET"])
 def snake():
-    return render_template('/games/snake/snake.html')
+    return render_template('/games-gameServer/snake/snake.html')
 
 
 
 bundles ={
     'index_css': Bundle(
-        'index.css',
+        '/css/index.css',
         output='gen/index.css'),
     'snake_css': Bundle(
-        'games/snake/style/snake.css',
+        'games-gameServer/games/snake/snake.css',
         output='gen/snake.css'
     ),
     'snake_js': Bundle(
-        'games/snake/scripts/snake.js',
-        'games/snake/scripts/game.js',
-        'games/snake/scripts/assets.js',
-        'games/snake/scripts/main.js',
+        'games-gameServer/snake/js/snake.js',
+        'games-gameServer/snake/js/game.js',
+        'games-gameServer/snake/js/assets.js',
+        'games-gameServer/snake/js/main.js',
         output='gen/snake.js'
     )
 }
