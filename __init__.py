@@ -12,7 +12,7 @@ app = Flask(__name__,
 
 @app.route("/", methods = ['POST', 'GET'])
 def home():
-    return render_template('html/index.html')
+    return render_template('index.html')
 
 @app.route("/snake", methods=["POST", "GET"])
 def snake():
@@ -22,10 +22,14 @@ def snake():
 
 bundles ={
     'index_css': Bundle(
-        '/css/index.css',
+        'modules/bootstrap/css/bootstrap.css',
         output='gen/index.css'),
+    'index_js': Bundle(
+        'modules/bootstrap/js/bootstrap.bundle.js',
+        output='gen/index.js'
+    ),
     'snake_css': Bundle(
-        'games-gameServer/games/snake/bootstrap/bootstrap.css',
+        'games-gameServer/snake/bootstrap/bootstrap.css',
         output='gen/snake.css'
     ),
     'snake_js': Bundle(
@@ -33,7 +37,7 @@ bundles ={
         'games-gameServer/snake/js/game.js',
         'games-gameServer/snake/js/assets.js',
         'games-gameServer/snake/js/main.js',
-        'games-gameServer/snake/boostrap/bootstrap.bundle.js',
+        'games-gameServer/snake/bootstrap/bootstrap.bundle.js',
         output='gen/snake.js'
     )
 }
