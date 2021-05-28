@@ -25,7 +25,7 @@ bundles ={
         '/css/index.css',
         output='gen/index.css'),
     'snake_css': Bundle(
-        'games-gameServer/games/snake/snake.css',
+        'games-gameServer/games/snake/bootstrap/bootstrap.css',
         output='gen/snake.css'
     ),
     'snake_js': Bundle(
@@ -33,6 +33,7 @@ bundles ={
         'games-gameServer/snake/js/game.js',
         'games-gameServer/snake/js/assets.js',
         'games-gameServer/snake/js/main.js',
+        'games-gameServer/snake/boostrap/bootstrap.bundle.js',
         output='gen/snake.js'
     )
 }
